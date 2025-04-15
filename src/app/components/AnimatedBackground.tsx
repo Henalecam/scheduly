@@ -38,7 +38,7 @@ export function AnimatedBackground() {
     // Initialize particles
     const initParticles = () => {
       const particles: Particle[] = [];
-      const count = Math.floor((canvas.width * canvas.height) / 20000);
+      const count = Math.floor((canvas.width * canvas.height) / 10000);
 
       for (let i = 0; i < count; i++) {
         particles.push({
@@ -57,8 +57,8 @@ export function AnimatedBackground() {
     const drawGrid = () => {
       const gridSize = 40;
       const gridColor = theme === 'dark' 
-        ? 'rgba(59, 130, 246, 0.02)'
-        : 'rgba(99, 102, 241, 0.02)';
+        ? 'rgba(59, 130, 246, 0.1)'
+        : 'rgba(99, 102, 241, 0.1)';
       
       ctx.strokeStyle = gridColor;
       ctx.lineWidth = 0.5;
