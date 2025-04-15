@@ -4,12 +4,13 @@ import Link from "next/link";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { AnimatedBackground } from "./components/AnimatedBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Timewise - Agendamento Inteligente com IA",
-  description: "Agende compromissos de forma natural com nossa IA. Diga o que precisa e nossa inteligência artificial entende.",
+  title: "Scheduly - Agendamento Inteligente",
+  description: "Agende compromissos de forma natural e eficiente com IA",
 };
 
 export default function RootLayout({
@@ -21,30 +22,34 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider>
-          <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
-            <header className="container mx-auto px-4 py-6">
-              <nav className="flex justify-between items-center">
-                <Link href="/" className="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
-                  Timewise
-                </Link>
-                <div className="flex items-center gap-6">
-                  <Link href="/schedule" className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors">
-                    Agendar
+          <AnimatedBackground />
+          <div className="min-h-screen flex flex-col">
+            <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center py-4">
+                  <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
+                    Scheduly
                   </Link>
-                  <Link href="/admin" className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors">
-                    Admin
-                  </Link>
-                  <ThemeToggle />
+                  <nav className="flex items-center gap-6">
+                    <Link href="/schedule" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                      Agendar
+                    </Link>
+                    <Link href="/admin" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                      Admin
+                    </Link>
+                    <ThemeToggle />
+                  </nav>
                 </div>
-              </nav>
+              </div>
             </header>
-            <main className="container mx-auto px-4 py-8">
+            <main className="flex-1">
               {children}
             </main>
-            <footer className="container mx-auto px-4 py-8 mt-auto">
-              <div className="border-t border-gray-200 dark:border-gray-700 pt-8 text-center text-gray-600 dark:text-gray-400">
-                <p>© 2025 Timewise. Todos os direitos reservados.</p>
-                <p className="text-sm mt-2">Agendamento inteligente para uma vida mais organizada</p>
+            <footer className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800 py-8">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p className="text-center text-gray-600 dark:text-gray-400">
+                  © 2024 Scheduly. Todos os direitos reservados.
+                </p>
               </div>
             </footer>
           </div>
