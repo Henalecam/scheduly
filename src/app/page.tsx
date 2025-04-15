@@ -1,103 +1,123 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { useTheme } from './ThemeProvider';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [activeFeature, setActiveFeature] = useState(0);
+  const { theme } = useTheme();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const features = [
+    {
+      title: 'Agendamento Natural',
+      description: 'Fale como preferir, nossa IA entende',
+      icon: '🗓️',
+      color: 'blue'
+    },
+    {
+      title: 'Horários Otimizados',
+      description: 'Sugestões inteligentes baseadas em sua agenda',
+      icon: '⏰',
+      color: 'green'
+    },
+    {
+      title: 'Lembretes Automáticos',
+      description: 'Nunca mais perca um compromisso',
+      icon: '🔔',
+      color: 'purple'
+    }
+  ];
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <section className="text-center mb-16">
+        <h1 className="text-5xl font-bold mb-6 text-gray-800 dark:text-white">
+          Agendamento Inteligente com IA
+        </h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+          Diga o que precisa e nossa IA entende. Agende compromissos de forma natural e eficiente.
+        </p>
+        
+        <div className="card max-w-2xl mx-auto mb-12">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+              <span className="text-2xl">🤖</span>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 italic">
+              &ldquo;Quero marcar uma reunião para segunda de manhã&rdquo;
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+              <span className="text-2xl">✅</span>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400">
+              → Nossa IA entende e sugere os melhores horários disponíveis
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <Link 
+          href="/schedule" 
+          className="button-primary text-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Experimente agora
+        </Link>
+      </section>
+
+      <section className="grid md:grid-cols-3 gap-8 mb-16">
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            className={`card cursor-pointer transition-all ${
+              activeFeature === index 
+                ? `ring-2 ring-${feature.color}-500 scale-105 shadow-soft${theme === 'dark' ? '-dark' : ''}`
+                : 'hover:shadow-soft hover:scale-[1.02]'
+            }`}
+            onClick={() => setActiveFeature(index)}
+          >
+            <div className={`text-4xl mb-4 text-${feature.color}-500`}>{feature.icon}</div>
+            <h3 className="font-semibold text-lg mb-2 text-gray-800 dark:text-white">
+              {feature.title}
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="card mb-16">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
+          Como Funciona
+        </h2>
+        <div className="grid md:grid-cols-4 gap-8">
+          {[
+            { step: '1️⃣', text: 'Digite sua solicitação' },
+            { step: '2️⃣', text: 'IA analisa e sugere' },
+            { step: '3️⃣', text: 'Escolha o horário' },
+            { step: '4️⃣', text: 'Confirme e pronto!' }
+          ].map((item, index) => (
+            <div key={index} className="text-center">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-xl">{item.step}</span>
+              </div>
+              <p className="font-semibold text-gray-700 dark:text-gray-300">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="text-center">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+          Pronto para começar?
+        </h2>
+        <Link 
+          href="/schedule" 
+          className="button-primary text-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Agende seu primeiro compromisso
+        </Link>
+      </section>
     </div>
   );
 }
