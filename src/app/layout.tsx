@@ -11,6 +11,22 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Scheduly - Agendamento Inteligente",
   description: "Agende compromissos de forma natural e eficiente com IA",
+  openGraph: {
+    title: "Scheduly - Agendamento Inteligente",
+    description: "Agende compromissos de forma natural e eficiente com IA",
+    url: "https://scheduly-eta.vercel.app/",
+    siteName: "Scheduly",
+    images: [
+      {
+        url: "/Scheduly.png",
+        width: 1200,
+        height: 630,
+        alt: "Scheduly logo and calendar",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
